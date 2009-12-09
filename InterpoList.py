@@ -6,7 +6,7 @@
     the missing ones.
 
     License:
-       Use for any purpose under one condition: I am not to blame.
+       Use for any purpose under one condition: I am not to blame for anything.
 """
 
 from bisect import bisect, bisect_left
@@ -14,9 +14,11 @@ from math import fabs
 
 class InterpoListItem:
     def __init__(self, key, value):
+        """ The constructor """
         self.key   = key
         self.value = value
     def __lt__(self, other):
+        """ The less than operator, required for sorting """
         return self.key < other.key
 
 class InterpoList:
@@ -30,7 +32,7 @@ class InterpoList:
             >>> a[50]
             100.0
             >>> a[125]
-            75.0
+            150.0
     """
     def __init__(self):
         """ constructor """
@@ -57,7 +59,7 @@ class InterpoList:
                 else:
                     # interpolate                    
                     factor = (self.items[i].key - idx) / (self.items[i].key - self.items[i-1].key)
-                    return self.items[i-1].value + (self.items[i].value - self.items[i-1].value)*factor
+                    return self.items[i].value - (self.items[i].value - self.items[i-1].value)*factor
 
     def __setitem__(self, index, value):
         """ adds a new index or replaces a current one """
@@ -80,3 +82,4 @@ class InterpoList:
             return fabs(self.items[-1].key - self.items[0].key)
         else:
             return 0.0
+
