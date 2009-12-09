@@ -11,8 +11,9 @@
 
 from bisect import bisect, bisect_left
 from math import fabs
+import string
 
-class InterpoListItem:
+class InterpoListItem(object):
     def __init__(self, key, value):
         """ The constructor """
         self.key   = key
@@ -20,8 +21,11 @@ class InterpoListItem:
     def __lt__(self, other):
         """ The less than operator, required for sorting """
         return self.key < other.key
-
-class InterpoList:
+    def __repr__(self):
+        """ Formal representation of the object """
+        return "%s(%s,%s)" % (type(self).__name__, self.key, self.value)
+    
+class InterpoList(object):
     """
         A list type which automatically does linear interpolation.
         For example:
@@ -34,20 +38,23 @@ class InterpoList:
             >>> a[125]
             150.0
     """
-    def __init__(self):
+    def __init__(self, data = {}):
         """ constructor """
         self.items = list()
+        for key in data:
+            self.__setitem__(key, data[key])
 
     def __getitem__(self, index):
         """ Returns the value for a given index """
         # create a dummy item for searching
         idx = float(index)
         item = InterpoListItem(idx, 0)
+        # find the position where it would be inserted
         i = bisect(self.items, item)
 
-        if i == 0 or i > len(self.items):
+        if i == 0: # or i > len(self.items):
             # refuse to extrapolate
-            raise ValueError 
+            raise ValueError("Extrapolation is not supported")
         else:
             if self.items[i-1].key == idx:
                 # exact
@@ -55,7 +62,7 @@ class InterpoList:
             else:
                 if i == len(self.items):
                     # refuse to extrapolate
-                    raise ValueError
+                    raise ValueError("Extrapolation is not supported")
                 else:
                     # interpolate                    
                     factor = (self.items[i].key - idx) / (self.items[i].key - self.items[i-1].key)
@@ -82,4 +89,15 @@ class InterpoList:
             return fabs(self.items[-1].key - self.items[0].key)
         else:
             return 0.0
+
+    def __repr__(self):
+        """ Formal description of the object """
+        # Dump the contents into a dict style string using a list comprehension expression.
+        # This makes sure there's no outer "loop" as such, which avoids allocating tons of
+        # (immutable) strings of increasing length.
+        lst = string.join([string.join( (str(i.key), str(i.value) ), ":") for i in self.items], ",")
+        # spit the whole thing out
+        return "%s(data={%s})" % (type(self).__name__, lst)
+
+
 
