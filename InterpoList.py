@@ -95,9 +95,7 @@ class InterpoList(object):
 
     def __repr__(self):
         """ Formal description of the object """
-        # Dump the contents into a dict style string using a list comprehension expression.
-        # This makes sure there's no outer "loop" as such, which avoids allocating tons of
-        # (immutable) strings of increasing length.
+        # Dump the contents into a dict style string
         lst = string.join([string.join( (str(i[0]), str(i[1]) ), ":") for i in self.items], ",")
         # spit the whole thing out
         return "%s(data={%s})" % (type(self).__name__, lst)
