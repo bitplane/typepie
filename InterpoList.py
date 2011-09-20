@@ -1,12 +1,10 @@
+#!/usr/bin/python
 """
     InterpoList module (c) Gaz Davidson December 2009.
 
     This is a simple interpolated list type useful for graphing, you
     can set values at any index and it will linearly interpolate between
     the missing ones.
-
-    License:
-       Use for any purpose under one condition: I am not to blame for anything.
 """
 
 from bisect import bisect, bisect_left
