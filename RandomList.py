@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """RandomList.py by Gaz Davidson 2011
-!!ACTUNG!! This is a low entropy toy to shuffle test data, don't 
-rely on it to produce data for cryptographic applications !!ACTUNG!!
+!!ACHTUNG!! This is a low entropy toy to shuffle test data, don't 
+rely on it to produce data for cryptographic applications !!ACHTUNG!!
 """
 import random
 
@@ -49,7 +49,8 @@ class RandomList(object):
         return current
 
     def __getitem__(self, index):
-        """List index and slice operator."""
+        """List index and slice operator.
+        todo: add slicing support!"""
         return self.getItem(index)
 
     def __len__(self):

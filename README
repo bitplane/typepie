@@ -3,3 +3,24 @@ A place to publish the different types I make for Python.
 Currently just contains a couple of interesting list types, but will be 
 expanded in future as and when needed.
 
+List of types
+-------------
+
+InterpoList: a list which does automatic interpolation between given numerical 
+    values, for example:
+        >>> a = InterpoList()
+        >>> a[0]   = 0
+        >>> a[100] = 200
+        >>> a[200] = 0
+        >>> a[50]
+        100.0
+        >>> a[125]
+        150.0
+
+    Currently only supports linear interpolation, but it would be relatively
+    easy to add different types in future. 
+
+    url: http://bitplane.net/2009/12/interpolist/
+
+
+RandomList: a lazily shuffled list of integers.
