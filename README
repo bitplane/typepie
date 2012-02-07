@@ -24,3 +24,5 @@ InterpoList: a list which does automatic interpolation between given numerical
 
 
 RandomList: a lazily shuffled list of integers.
+
+Timestamper: Wraps around a FIFO queue, timestamping each entry as it is added.
